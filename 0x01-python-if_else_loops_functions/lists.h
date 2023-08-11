@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #ifndef LISTS_H
+=======
+fndef LISTS_H
+>>>>>>> cdec887f77613d69d8107433ebf5f7871f48c5dc
 #define LISTS_H
 
 #include <stdlib.h>
@@ -24,4 +28,7 @@ listint_t *insert_node(listint_t **head, int number);
 
 #endif /* LISTS_H */
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cdec887f77613d69d8107433ebf5f7871f48c5dc

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 # 6-print_comb3.py
 
 """Print all possible different combinations of two digits in ascending order.
@@ -12,3 +13,11 @@ for digit1 in range(0, 10):
         else:
             print("{}{}".format(digit1, digit2), end=", ")
 
+=======
+for i in range(10):
+    for j in range(i + 1, 10):
+        print("{:d}{:d}".format(i, j), end="")
+        if i != 8 or j != 9:
+            print(", ", end="")
+print()
+>>>>>>> cdec887f77613d69d8107433ebf5f7871f48c5dc

@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+<<<<<<< HEAD
 # 7-islower.py
 
 
@@ -9,3 +10,10 @@ def islower(c):
     else:
         return False
 
+=======
+def islower(c):
+    if 97 <= ord(c) <= 122:
+        return True
+    else:
+        return False
+>>>>>>> cdec887f77613d69d8107433ebf5f7871f48c5dc
