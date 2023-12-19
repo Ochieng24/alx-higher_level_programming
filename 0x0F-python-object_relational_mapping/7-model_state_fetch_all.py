@@ -1,19 +1,51 @@
 #!/usr/bin/python3
-"""lists all State objects from the database hbtn_0e_6_usa"""
+"""
+script that lists all State objects from the
+database hbtn_0e_6_usa
+"""
+import sqlalchemy
+from sqlalchemy.orm import sessionmaker
+from model_state import Base, State
+import sys
+
+
+def main():
+    """
+    List all states from the specified MySQL database
+    using SQLAlchemy.
+    """
+    if len(sys.argv) != 4:
+        print("Usage: {} <mysql_username>"
+              " <mysql_password> <database_name>".format(sys.argv[0]))
+        sys.exit(1)
+    # capture the command-line arguments
+    username = sys.argv[1]
+    password = sys.argv[2]
+    database_name = sys.argv[3]
+
+    try:
+        # create database engine and connect to the database
+        engine = sqlalchemy.create_engine(
+            "mysql+mysqldb://{}:{}@localhost/{}".format(
+                username, password, database_name
+            ),
+            pool_pre_ping=True
+        )
+        # create a session
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        # create a query to select all states
+        states = session.query(State).order_by(State.id).all()
+
+        # display the results
+        for state in states:
+            print("{}: {}".format(state.id, state.name))
+    except sqlalchemy.DatabaseError as e:
+        print(e)
+    finally:
+        session.close()
+
 
 if __name__ == "__main__":
-
-    import sys
-    from model_state import Base, State
-    from sqlalchemy import create_engine
-    from sqlalchemy.orm import Session
-
-    engine = create_engine('mysql+mysqldb://{}:{}@localhost/{}'
-                           .format(sys.argv[1], sys.argv[2],
-                                   sys.argv[3]), pool_pre_ping=True)
-    Base.metadata.create_all(engine)
-
-    session = Session(engine)
-    for state in session.query(State).order_by(State.id).all():
-        print("{}: {}".format(state.id, state.name))
-    session.close()
+    main()
